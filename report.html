@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attendance Dashboard | By Code Info</title>
+    <link rel="stylesheet" href="reports.css" />
+    <!-- Font Awesome Cdn Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="line"></div>
+    <header class="header">
+      <div class="logos">
+        <a href="#" style="text-decoration: underline">DHT Trace</a>
+        <div class="search_box">
+          <input type="text" placeholder="Search Traceability" />
+          <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+
+      <div class="header-icons">
+        <i class="fas fa-bell"></i>
+        <div class="account">
+          <img src="./img/loupe.png" alt="" />
+          <h4>LoRa Sol</h4>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="logo">
+              <img src="./img/main_logo.png" />
+              <span class="nav-item" style="color: black">Work Trace</span>
+            </a>
+          </li>
+          <li>
+            <a href="./index.html">
+              <i class="fas fa-gauge"></i>
+              <span class="nav-item">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="./task.html">
+              <i class="fas fa-comment"></i>
+              <span class="nav-item">Work Flow</span>
+            </a>
+          </li>
+          <li>
+            <a href="./report.html">
+              <i class="fas fa-database"></i>
+              <span class="nav-item">Check List</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Report</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Setting</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- MAIN -->
+      <main>
+        <h1 class="title">Work Progress View</h1>
+        <div class="info-data">
+          <div class="card">
+            <div class="head">
+              <div>
+                <h2>Requirement</h2>
+                <p>In Progress</p>
+              </div>
+              <i class="bx bx-trending-up icon"></i>
+            </div>
+            <span class="progress" data-value="10%"></span>
+            <span class="label">10%</span>
+          </div>
+          <div class="card">
+            <div class="head">
+              <div>
+                <h2>Design</h2>
+                <p>New</p>
+              </div>
+              <i class="bx bx-trending-down icon down"></i>
+            </div>
+            <span class="progress" data-value="5%"></span>
+            <span class="label">5%</span>
+          </div>
+          <div class="card">
+            <div class="head">
+              <div>
+                <h2>Coding</h2>
+                <p>New</p>
+              </div>
+              <i class="bx bx-trending-up icon"></i>
+            </div>
+            <span class="progress" data-value="5%"></span>
+            <span class="label">5%</span>
+          </div>
+          <div class="card">
+            <div class="head">
+              <div>
+                <h2>Testing</h2>
+                <p>New</p>
+              </div>
+              <i class="bx bx-trending-up icon"></i>
+            </div>
+            <span class="progress" data-value="0%"></span>
+            <span class="label">0%</span>
+          </div>
+        </div>
+        <div class="data">
+          <div class="content-data">
+            <div class="head">
+              <h3>Work Visualization</h3>
+              <div class="menu">
+                <i class="bx bx-dots-horizontal-rounded icon"></i>
+                <ul class="menu-link">
+                  <li><a href="#">Edit</a></li>
+                  <li><a href="#">Save</a></li>
+                  <li><a href="#">Remove</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="chart">
+              <div id="chart"></div>
+            </div>
+          </div>
+          <div class="content-data">
+            <div class="order">
+              <div class="head">
+                <h3>Work Item</h3>
+                <i class="bx bx-search"></i>
+                <i class="bx bx-filter"></i>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Planning date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src="./img/boy.png" />
+                      <p>Hau Do Trung</p>
+                    </td>
+                    <td>10-09-24</td>
+                    <td><div class="status completed">In Progress</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./img/man.png" />
+                      <p>Thang Do Hoang</p>
+                    </td>
+                    <td>25-09-24</td>
+                    <td><div class="status process">New</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./img/man1.png" />
+                      <p>An Nguyen Minh Khoa</p>
+                    </td>
+                    <td>15-10-24</td>
+                    <td><div class="status process">New</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./img/good-person.png" />
+                      <p>Power User</p>
+                    </td>
+                    <td>01-09-24</td>
+                    <td><div class="status checking">In Trace</div></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./img/process.png" />
+                      <p>Process Tracer</p>
+                    </td>
+                    <td>01-09-24</td>
+                    <td><div class="status checking">In Check</div></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
