@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Attendance Dashboard | By Code Info</title>
+    <link rel="stylesheet" href="require.css" />
+    <!-- Font Awesome Cdn Link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="line"></div>
+    <header class="header">
+      <div class="logos">
+        <a href="#" style="text-decoration: underline">DHT Trace</a>
+        <div class="search_box">
+          <input type="text" placeholder="Search Traceability" />
+          <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+        </div>
+      </div>
+
+      <div class="header-icons">
+        <i class="fas fa-bell"></i>
+        <div class="account">
+          <img src="./img/loupe.png" alt="" />
+          <h4>LoRa Sol</h4>
+        </div>
+      </div>
+    </header>
+
+    <div class="container">
+      <nav>
+        <ul>
+          <li>
+            <a href="#" class="logo">
+              <img src="./img/main_logo.png" />
+              <span class="nav-item" style="color: black">Work Trace</span>
+            </a>
+          </li>
+          <li>
+            <a href="./main.html">
+              <i class="fas fa-gauge"></i>
+              <span class="nav-item">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="./task.html">
+              <i class="fas fa-list-check"></i>
+              <span class="nav-item">Work Flow</span>
+            </a>
+          </li>
+          <li>
+            <a href="./report.html">
+              <i class="fas fa-bars-progress"></i>
+              <span class="nav-item">Check List</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-chart-bar"></i>
+              <span class="nav-item">Report</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fas fa-cog"></i>
+              <span class="nav-item">Setting</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="main">
+        <div class="main-top">
+          <h1>In Progress</h1>
+          <i class="fas fa-user-cog"></i>
+        </div>
+
+        <section class="attendance">
+          <div class="attendance-list">
+            <h1>Sketch of Requirement Flow</h1>
+
+            <!-- Thêm các nút phía trên bảng -->
+            <div class="button-container">
+                <button class="neumorphism-btn pastel-btn" id="fetch-btn">
+                    FETCH
+                  </button>
+              <button class="neumorphism-btn pastel-btn" id="overview-btn">
+                OVERVIEW
+              </button>
+              <button class="neumorphism-btn pastel-btn" id="slave-btn">
+                SLAVE
+              </button>
+              <button class="neumorphism-btn pastel-btn" id="master-btn">
+                MASTER
+              </button>
+            </div>
+
+            <div id="content">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>System Feature</th>
+                    <th>Description</th>
+                    <th>Main Component</th>
+                    <th>Detail</th>
+                    <th>Method</th>
+                    <th>Work State</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>01</td>
+                    <td>Collect data</td>
+                    <td>Collect data from sensors</td>
+                    <td>Sensor</td>
+                    <td>Data on aquaculture</td>
+                    <td>Read and Trace</td>
+                    <td><button id="state_1">Available</button></td>
+                  </tr>
+                  <tr class="active">
+                    <td>02</td>
+                    <td>Monitor data</td>
+                    <td>Monitor data and set action</td>
+                    <td>Actuator</td>
+                    <td>Set action for actuator</td>
+                    <td>Trace</td>
+                    <td><button id="state_2">Available</button></td>
+                  </tr>
+                  <tr>
+                    <td>03</td>
+                    <td>Interconnect</td>
+                    <td>Communication between stations</td>
+                    <td>LoRa</td>
+                    <td>LoRa Module</td>
+                    <td>Wireless</td>
+                    <td><button id="state_3">Available</button></td>
+                  </tr>
+                  <tr>
+                    <td>04</td>
+                    <td>Control</td>
+                    <td>Control actuator from a far</td>
+                    <td>WiFi/LoRa/Manual</td>
+                    <td>Communication</td>
+                    <td>Wire & Wireless</td>
+                    <td><button id="state_4">Available</button></td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+        </div>
+        </section>
+
+        <div id="attendance_1">
+            <img src="./img/LORA_1.jpg" alt="" style="width: 50%;" />
+        </div>
+    </section>
+ 
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-storage.js"></script>
+
+    <script>
+      // Firebase configuration (replace with your own Firebase config)
+      const firebaseConfig = {
+        apiKey: "AIzaSyAtj1SB8ZlBhwChqRr7V_9hJQSqCW5zdjo",
+        authDomain: "dht-trace.firebaseapp.com",
+        projectId: "dht-trace",
+        storageBucket: "dht-trace.appspot.com",
+        messagingSenderId: "436573278890",
+        appId: "1:436573278890:web:1c73f0e0c5f7f8ee60b6d3",
+        measurementId: "G-3G5HGVCL6W",
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="require.js"></script>
+  </body>
+</html>

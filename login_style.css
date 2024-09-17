@@ -8,17 +8,20 @@
 }
 
 img {
-  width: 90px;
-  height: 90px;
-  position: relative;
-  top: -50px;
-  left: 35%;
+  width: 70px; /* Tăng kích thước ảnh */
+  height: 70px; /* Ảnh vuông */
+  margin-bottom: 20px; /* Thêm khoảng trống giữa ảnh và form */
+  border-radius: 50%; /* Ảnh tròn */
+  box-shadow: 5px 5px 10px #b0a8a8, -5px -5px 10px #bbbaba; /* Hiệu ứng Neumorphism */
+  margin-left: 140px;
+  margin-top: 16px;
 }
 
 h2 {
-  margin: -25px 0 20px 0;
+  margin: 0px 0 20px 0;
   text-align: center;
   color: #8f8888;
+
 }
 
 form {
@@ -67,4 +70,3 @@ a {
   font-size: 16px;
   text-decoration: none;
 }
-

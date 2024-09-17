@@ -156,7 +156,7 @@ a:hover i {
   border: 1px solid #507687;
 }
 .users .card button:hover {
-  background: #227B94;
+  background: #227b94;
   color: #fff;
   transition: 0.5s;
 }
@@ -167,7 +167,9 @@ a:hover i {
   text-transform: capitalize;
   width: 100%;
 }
-.attendance-list {
+
+.attendance-list,
+#attendance_1 {
   width: 100%;
   padding: 10px;
   margin-top: 0.1px;
@@ -175,6 +177,16 @@ a:hover i {
   border-radius: 10px;
   box-shadow: 5px 5px 10px #827d7d, -5px -5px 10px #dfdcdc;
 }
+
+#attendance_1 {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+/* #attendance_1 img {
+  width: 60%;
+} */
 .table {
   border-collapse: collapse;
   margin: 25px 0;
@@ -185,7 +197,7 @@ a:hover i {
 }
 table thead tr {
   color: #fff;
-  background: #117554;
+  background: #227b94;
   text-align: left;
   font-weight: bold;
 }
@@ -201,10 +213,10 @@ table thead tr {
 }
 .table tbody tr.active {
   font-weight: bold;
-  color: #557C56;
+  color: #6a9c89;
 }
 .table tbody tr:last-of-type {
-  border-bottom: 2px solid #185519;
+  border-bottom: 2px solid #16325b;
 }
 
 #state_1 {
@@ -313,3 +325,68 @@ table thead tr {
 }
 
 /* ....................... */
+/* Container cho các nút */
+/* Định dạng cho container chứa nút */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Căn phải */
+  margin-bottom: 20px;
+  margin-right: 20px; /* Khoảng cách từ nút đến cạnh phải */
+}
+
+/* Định dạng cho các nút */
+.neumorphism-btn {
+  width: 120px;
+  height: 50px;
+  margin: 0 15px; /* Khoảng cách giữa các nút */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #000000;
+  cursor: pointer;
+  box-shadow: 10px 10px 20px #b0a8a8, -10px -10px 20px #ffffff;
+  transition: all 0.3s ease; /* Hiệu ứng chuyển đổi khi nhấn */
+}
+
+/* Hiệu ứng khi nhấn nút */
+.neumorphism-btn:active {
+  box-shadow: inset 8px 8px 15px #b0a8a8, inset -8px -8px 15px #ffffff; /* Hiệu ứng lõm khi nhấn */
+}
+
+/* Hiệu ứng hover */
+.neumorphism-btn:hover {
+  background: #d3d3d3; /* Hiệu ứng màu nền khi hover */
+}
+
+/* Màu pastel cho từng nút */
+#overview-btn {
+  background-color: #4f75ff; /* Màu pastel hồng */
+}
+
+#slave-btn {
+  background-color: #ff885b; /* Màu pastel cam */
+}
+
+#master-btn {
+  background-color: #41b3a2; /* Màu pastel xanh lá */
+}
+#fetch-btn{
+    background-color: #86AB89; /* Màu pastel xanh lá */
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+h1 {
+  text-align: left;
+  margin-bottom: 20px;
+}
