@@ -73,18 +73,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const toPDF = function (customers_table) {
     const rows = customers_table.querySelectorAll("tbody tr");
-    const totalItems = rows.length;
     let totalQuantity = 0;
     let totalPrices = 0;
 
-    rows.forEach((row) => {
+    // Bắt đầu từ hàng thứ 2 (index 1)
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const quantityCell = row.querySelector("td:nth-child(6)"); // Cột thứ 6
+      const totalCell = row.querySelector("td:nth-child(7)"); // Cột thứ 7
+
       const quantity =
-        parseFloat(row.querySelector("td:nth-child(5)").innerText) || 0;
-      const total =
-        parseFloat(row.querySelector("td:nth-child(6)").innerText) || 0;
+        parseFloat(quantityCell ? quantityCell.innerText : "0") || 0;
+      const total = parseFloat(totalCell ? totalCell.innerText : "0") || 0;
+
       totalQuantity += quantity;
       totalPrices += total;
-    });
+    }
 
     const totalRow = `
         <tr>
