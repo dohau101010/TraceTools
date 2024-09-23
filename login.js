@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password").value;
 
     // Kiểm tra thông tin đăng nhập
-    if (username === "DTH" && password === "DTH") {
+    if (
+      (username === "DTH" && password === "DTH") ||
+      (username === "PLTV" && password === "PLTV")
+    ) {
       window.location.href = "main.html"; // Điều hướng tới trang chính
     } else {
       alert("Sai Username hoặc Password! Vui lòng thử lại.");

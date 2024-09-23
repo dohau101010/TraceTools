@@ -2,112 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Collecting Data</title>
-    <link rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convert DTH to Excel</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
   </head>
-
-  <body class="container" style="margin-top: 50px; width: 50%; height: auto">
-    <h2 class="text-primary" style="margin-left: 15px; margin-bottom: 10px">
-      Hey There, Here we are going to upload
-    </h2>
-
-    <form class="container" id="contactForm">
-      <div class="card">
-        <div class="card-body">
-          <div
-            class="form-group"
-            style="margin-left: 15px; margin-top: 10px; display: none"
-          >
-            <label for="exampleFormControlSelect1">Select Type</label>
-            <select class="form-control" id="types">
-              <option>1</option>
-            </select>
-          </div>
-
-          <br />Document Upload:<br />
-          <!-- click here to choose file -->
-          <input type="file" name="files[]" id="files" />
-          <!-- click here to upload file -->
-          <input type="hidden" name="url" id="url" />
-          <button type="button" onclick="uploadImage()">Upload Image</button>
-          <br /><br />
-        </div>
-      </div>
-
-      <button
-        type="submit"
-        class="btn btn-primary"
-        style="margin-left: 15px; margin-top: 10px; display: none"
-      >
-        Submit
-      </button>
-    </form>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-storage.js"></script>
+  <body>
+    <h1>Convert DTH to Excel</h1>
+    <div>
+      <label for="file-input">Chọn file .dth:</label>
+      <input type="file" id="file-input" accept=".dth" />
+    </div>
 
     <script>
-      // Firebase configuration (replace with your own Firebase config)
-      const firebaseConfig = {
-        apiKey: "AIzaSyAtj1SB8ZlBhwChqRr7V_9hJQSqCW5zdjo",
-        authDomain: "dht-trace.firebaseapp.com",
-        projectId: "dht-trace",
-        storageBucket: "dht-trace.appspot.com",
-        messagingSenderId: "436573278890",
-        appId: "1:436573278890:web:1c73f0e0c5f7f8ee60b6d3",
-        measurementId: "G-3G5HGVCL6W",
-      };
-      firebase.initializeApp(firebaseConfig);
+      const secretKey = "my-strong-secret-key"; // Khóa giải mã
 
-      var messagesRef = firebase.database().ref("Checking");
-
-      // Function to handle file upload
-      function uploadImage() {
-        var type = getInputVal("types");
-        var storage = firebase.storage();
-        var file = document.getElementById("files").files[0];
-
-        if (!file) {
-          alert("Please select a file first!");
-          return;
-        }
-
-        var storageref = storage.ref();
-        var thisref = storageref.child(type).child(file.name).put(file);
-
-        thisref.on(
-          "state_changed",
-          function (snapshot) {
-            // You can track upload progress here
-          },
-          function (error) {
-            // Handle unsuccessful uploads
-            console.error("Upload error:", error);
-          },
-          function () {
-            // Handle successful uploads
-            thisref.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-              document.getElementById("url").value = downloadURL;
-              alert("Uploaded successfully!");
-              saveMessage(downloadURL);
-            });
+      document
+        .getElementById("file-input")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (!file) {
+            alert("Vui lòng chọn một file .dth.");
+            return;
           }
-        );
-      }
 
-      // Function to get input values
-      function getInputVal(id) {
-        return document.getElementById(id).value;
-      }
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const data = e.target.result;
+            downloadExcelFromDTH(data);
+          };
 
-      // Save message to firebase database
-      function saveMessage(url) {
-        var newMessageRef = messagesRef.push();
-        newMessageRef.set({
-          imageurl: url,
+          reader.readAsArrayBuffer(file);
         });
+
+      function downloadExcelFromDTH(data) {
+        const decryptedData = decryptData(data);
+
+        // Tạo workbook và worksheet từ dữ liệu JSON
+        const worksheet = XLSX.utils.json_to_sheet(decryptedData);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+        // Tải file Excel về
+        XLSX.writeFile(workbook, "data.xlsx");
+      }
+
+      function decryptData(data) {
+        const decrypted = CryptoJS.AES.decrypt(data.toString(), secretKey);
+        const decodedData = decrypted.toString(CryptoJS.enc.Utf8);
+
+        // Kiểm tra dữ liệu đã giải mã
+        console.log(decodedData); // In ra console để kiểm tra
+
+        const workbook = XLSX.read(decodedData, { type: "binary" });
+        const jsonData = XLSX.utils.sheet_to_json(
+          workbook.Sheets[workbook.SheetNames[0]]
+        );
+
+        return jsonData;
       }
     </script>
   </body>

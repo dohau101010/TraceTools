@@ -218,6 +218,7 @@ main .info-data .card {
   border-radius: 10px;
   background: var(--light);
   box-shadow: 5px 5px 10px #827d7d, -5px -5px 10px #dfdcdc;
+  
 }
 main .card .head {
   display: flex;
