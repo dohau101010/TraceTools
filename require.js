@@ -143,11 +143,7 @@ function handleFilesDownload() {
 
   // Function to download a single file
   function downloadFile(fileName, delay) {
-<<<<<<< HEAD
     setTimeout(function () {
-=======
-    setTimeout(function() {
->>>>>>> 96076a555bc9b66244659413444a52d6eb8c191f
       var fileRef = storageRef.child(folderPath).child(fileName); // Set path to each file
 
       fileRef
@@ -179,4 +175,3 @@ function handleFilesDownload() {
 document
   .getElementById("fetch-btn")
   .addEventListener("click", handleFilesDownload);
-
