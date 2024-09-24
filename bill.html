@@ -122,16 +122,24 @@
 
       function decryptData(data) {
         const decrypted = CryptoJS.AES.decrypt(
-          data.toString(),
+          data.toString(CryptoJS.enc.Latin1),
           "my-strong-secret-key"
         );
         const decodedData = decrypted.toString(CryptoJS.enc.Utf8);
         console.log(decodedData); // Kiểm tra giá trị
+
         const workbook = XLSX.read(decodedData, { type: "binary" });
         const jsonData = XLSX.utils.sheet_to_json(
           workbook.Sheets[workbook.SheetNames[0]]
         );
         return jsonData;
+      }
+
+      function formatNumber(number) {
+        if (typeof number === "number" || !isNaN(number)) {
+          return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        return number; // Nếu không phải số, trả về giá trị gốc
       }
 
       function displayData(data) {
@@ -141,18 +149,25 @@
         data.forEach((item) => {
           const row = document.createElement("tr");
           row.innerHTML = `
-                <td>${item.Id || ""}</td>
-                <td>${item.Component || ""}</td>
-                <td>${item.Feature || ""}</td>
-                <td>${item["Stored In"] || ""}</td>
-                <td>${item.Prices || ""}</td>
-                <td>${item.Quantity || ""}</td>
-                <td>${item.Total || ""}</td>
-            `;
+              <td>${item.Id || ""}</td>
+              <td>${item.Component || ""}</td>
+              <td>${item.Feature || ""}</td>
+              <td>${item["Stored In"] || ""}</td>
+              <td>${
+                formatNumber(item.Prices) || ""
+              }</td> <!-- Định dạng Prices -->
+              <td>${
+                formatNumber(item.Quantity) || ""
+              }</td> <!-- Định dạng Quantity -->
+              <td>${
+                formatNumber(item.Total) || ""
+              }</td> <!-- Định dạng Total -->
+          `;
           tableBody.appendChild(row); // Thêm hàng vào bảng
         });
       }
     </script>
+
     <script src="./bill.js"></script>
   </body>
 </html>
