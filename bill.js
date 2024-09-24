@@ -133,6 +133,17 @@ document.addEventListener("DOMContentLoaded", function () {
           img, .input-group, .export__file {
             display: none !important;
           }
+          .watermark {
+            position: fixed; /* Đặt dấu chìm cố định */
+            top: 50%;
+            left: 50%;
+             transform: translate(-50%, -50%) rotate(-30deg); /* Dịch chuyển và nghiêng 30 độ */
+            font-size: 100px; /* Kích thước chữ của dấu chìm */
+            color: rgba(0, 0, 0, 0.1); /* Màu sắc và độ trong suốt của dấu chìm */
+            white-space: nowrap; /* Không cho xuống dòng */
+            pointer-events: none; /* Không ảnh hưởng đến tương tác với bảng */
+            z-index: -1; /* Đưa dấu chìm ra phía sau */
+          }
           main.table {
             border-radius: 0 !important;
             box-shadow: none !important;
@@ -169,20 +180,20 @@ document.addEventListener("DOMContentLoaded", function () {
           th:first-child, td:first-child {
             width: 50px; 
           }
-              /* Điều chỉnh chiều rộng cho cột Quantity */
+          /* Điều chỉnh chiều rộng cho cột Quantity */
           th:nth-child(6), td:nth-child(6) {
-          width: 100px; /* Hẹp lại cho cột Quantity */
-        }
-                /* Điều chỉnh chiều rộng cho cột Quantity */
+            width: 100px; /* Hẹp lại cho cột Quantity */
+          }
+          /* Điều chỉnh chiều rộng cho cột Quantity */
           th:nth-child(7), td:nth-child(7) {
-          width: 120px; /* Hẹp lại cho cột Quantity */
-        }
-           th:nth-child(2), td:nth-child(2) {
-          width: 180px; /* Hẹp lại cho cột Quantity */
-        }
-        th:nth-child(5), td:nth-child(5) {
-          width: 100px; /* Hẹp lại cho cột Quantity */
-        }
+            width: 120px; /* Hẹp lại cho cột Quantity */
+          }
+          th:nth-child(2), td:nth-child(2) {
+            width: 180px; /* Hẹp lại cho cột Quantity */
+          }
+          th:nth-child(5), td:nth-child(5) {
+            width: 100px; /* Hẹp lại cho cột Quantity */
+          }
           body {
             font-size: 10px;
             font-family: Arial, sans-serif;
@@ -197,6 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
       </style>
     </head>
     <body>
+      <div class="watermark">DTH TRACE REPORT</div> <!-- Phần tử dấu chìm -->
       <main class="table" id="customers_table">${modifiedTable}</main>
     </body>
     </html>`;
