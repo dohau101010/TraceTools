@@ -145,8 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         padding: 10px;
                         border: 1px solid #000;
                         color: black;
-                        word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
-                        word-break: break-all; /* Ngắt từ nếu không vừa */
+                   
                     }
                         
                     tr:nth-child(even) td {
