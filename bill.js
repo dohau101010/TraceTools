@@ -100,118 +100,162 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const totalRow = `
-      <tr>
-        <td><strong>TT</strong></td>
-        <td><strong>#</strong></td>
-        <td><strong>#</strong></td>
-        <td><strong>#</strong></td>
-        <td><strong>#</strong></td>
-        <td><strong>${formatNumber(
-          totalQuantity
-        )}</strong></td> <!-- Định dạng lại số -->
-        <td><strong>${formatNumber(
-          totalPrices
-        )}</strong></td> <!-- Định dạng lại số -->
-      </tr>
-    `;
+        <tr>
+          <td><strong>TT</strong></td>
+          <td><strong>#</strong></td>
+          <td><strong>#</strong></td>
+          <td><strong>#</strong></td>
+          <td><strong>#</strong></td>
+          <td><strong>${formatNumber(totalQuantity)}</strong></td>
+          <td><strong>${formatNumber(totalPrices)}</strong></td>
+        </tr>
+      `;
 
     const modifiedTable = customers_table.innerHTML.replace(
       /(<\/tbody>)/,
       totalRow + "$1"
     );
 
+    const printDate = new Date().toLocaleDateString(); // Lấy ngày giờ hiện tại
+
     const html_code = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <link rel="stylesheet" type="text/css" href="style.css">
-      <style>
-        @media print {
-          @page {
-            margin: 1cm;
-          }
-          img, .input-group, .export__file {
-            display: none !important;
-          }
-          .watermark {
-            position: fixed; /* Đặt dấu chìm cố định */
-            top: 50%;
-            left: 50%;
-             transform: translate(-50%, -50%) rotate(-30deg); /* Dịch chuyển và nghiêng 30 độ */
-            font-size: 100px; /* Kích thước chữ của dấu chìm */
-            color: rgba(0, 0, 0, 0.1); /* Màu sắc và độ trong suốt của dấu chìm */
-            white-space: nowrap; /* Không cho xuống dòng */
-            pointer-events: none; /* Không ảnh hưởng đến tương tác với bảng */
-            z-index: -1; /* Đưa dấu chìm ra phía sau */
-          }
-          main.table {
-            border-radius: 0 !important;
-            box-shadow: none !important;
-            background-color: transparent !important;
-          }
-          .table__body {
-            border-radius: 0;
-          }
-          table {
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <style>
+          @media print {
+            @page {
+              margin: 1cm;
+            }
+              #hate {
+                display: none !important;
+            }
+            #haha {
+                font-size: 25px;
+            }
+            img, .input-group, .export__file {
+              display: none !important;
+            }
+            .watermark {
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%) rotate(-30deg);
+              font-size: 100px;
+              color: rgba(0, 0, 0, 0.1);
+              white-space: nowrap;
+              pointer-events: none;
+              z-index: -1;
+            }
+            main.table {
+              border-radius: 0 !important;
+              box-shadow: none !important;
+              background-color: transparent !important;
+            }
+
+            .table__body {
+              border-radius: 0;
+            }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              border: 2px solid #000;
+              table-layout: fixed;
+            }
+            th, td {
+              padding: 10px;
+              border: 2px solid #000;
+              color: black;
+              text-align: center;
+              vertical-align: middle;
+              word-wrap: break-word;
+              word-break: break-all;
+            }
+            tr:nth-child(even) td {
+              background-color: #f2f2f2;
+            }
+            tr:nth-child(odd) td {
+              background-color: white;
+            }
+            thead th span.icon-arrow {
+              display: none;
+            }
+            th:first-child, td:first-child {
+              width: 50px;
+            }
+            th:nth-child(6), td:nth-child(6) {
+              width: 100px;
+            }
+            th:nth-child(7), td:nth-child(7) {
+              width: 120px;
+            }
+            th:nth-child(2), td:nth-child(2) {
+              width: 180px;
+            }
+            th:nth-child(5), td:nth-child(5) {
+              width: 100px;
+            }
+            body {
+              font-size: 10px;
+              font-family: Arial, sans-serif;
+            }
+            table, tr, td, th {
+              page-break-inside: avoid;
+            }
+            body {
+              zoom: 90%;
+            }
+            /* Style for detail report */
+            .detail-report {
+              width: 100%;
+              border-collapse: collapse;
+              margin-top: 10px;
+              margin-bottom: 20px;
+              text-align: center;
+            }
+            .detail-report {
             width: 100%;
             border-collapse: collapse;
+            margin-bottom: 20px;
+            text-align: center;
+            }
+
+            .detail-report th,
+            .detail-report td {
             border: 1px solid #000;
-            table-layout: fixed; /* Cố định kích thước bảng */
-          }
-          th, td {
             padding: 10px;
-            border: 1px solid #000;
-            color: black;
-            text-align: center; /* Căn giữa theo chiều ngang */
-            vertical-align: middle; /* Căn giữa theo chiều dọc */
-            word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
-            word-break: break-all;  /* Ngắt từ nếu không vừa */
+            font-weight: bold;
+            }
+
+            .detail-report th {
+            text-align: center;
+            border-bottom: 2px solid #000; /* Dòng kẽ dưới dày hơn cho tiêu đề */
+            }
+
           }
-          tr:nth-child(even) td {
-            background-color: #f2f2f2;
-          }
-          tr:nth-child(odd) td {
-            background-color: white;
-          }
-          thead th span.icon-arrow {
-            display: none;
-          }
-         
-          th:first-child, td:first-child {
-            width: 50px; 
-          }
-          /* Điều chỉnh chiều rộng cho cột Quantity */
-          th:nth-child(6), td:nth-child(6) {
-            width: 100px; /* Hẹp lại cho cột Quantity */
-          }
-          /* Điều chỉnh chiều rộng cho cột Quantity */
-          th:nth-child(7), td:nth-child(7) {
-            width: 120px; /* Hẹp lại cho cột Quantity */
-          }
-          th:nth-child(2), td:nth-child(2) {
-            width: 180px; /* Hẹp lại cho cột Quantity */
-          }
-          th:nth-child(5), td:nth-child(5) {
-            width: 100px; /* Hẹp lại cho cột Quantity */
-          }
-          body {
-            font-size: 10px;
-            font-family: Arial, sans-serif;
-          }
-          table, tr, td, th {
-            page-break-inside: avoid; /* Ngăn không cho bảng bị cắt khi in */
-          }
-          body {
-            zoom: 90%;
-          }
-        }
-      </style>
-    </head>
-    <body>
-      <div class="watermark">DTH TRACE REPORT</div> <!-- Phần tử dấu chìm -->
-      <main class="table" id="customers_table">${modifiedTable}</main>
-    </body>
-    </html>`;
+        </style>
+      </head>
+      <body>
+      <h1 id = "haha" >Customer's Orders Statement</h1>
+        <div class="watermark">DTH TRACE REPORT</div>
+        <table class="detail-report">
+          <tr>
+            <th>Detail Report</th>
+            <th>Component Order Statement</th>
+          </tr>
+          <tr>
+            <td>Raised Date</td>
+            <td>${printDate}</td>
+          </tr>
+          <tr>
+            <td>Approval</td>
+            <td>Commited</td>
+          </tr>
+        </table>
+        <main class="table" id="customers_table">${modifiedTable}</main>
+      </body>
+      </html>`;
 
     const new_window = window.open();
     new_window.document.write(html_code);
