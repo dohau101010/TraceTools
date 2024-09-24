@@ -134,40 +134,34 @@ document.getElementById("master-btn").addEventListener("click", function () {
   document.getElementById("attendance_1").innerHTML =
     ' <img src="./img/LORA_3.jpg" alt="" style="width: 35%;" />';
 });
+// Function to handle multiple file downloads
 function handleFilesDownload() {
   // List of file names to download
   var fileNames = ["Requirement.docx", "SDK.pptx"];
+
   var folderPath = "Requirement"; // Path to the folder
   var storage = firebase.storage();
   var storageRef = storage.ref();
 
-  // Function to download a single file
-  function downloadFile(fileName, delay) {
-    setTimeout(function () {
-      var fileRef = storageRef.child(folderPath).child(fileName); // Set path to each file
+  fileNames.forEach(function (fileName) {
+    var fileRef = storageRef.child(folderPath).child(fileName); // Set path to each file
 
-      fileRef
-        .getDownloadURL()
-        .then(function (url) {
-          // Create a link element to initiate download
-          var link = document.createElement("a");
-          link.href = url;
-          link.download = fileName; // Suggest filename for download
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        })
-        .catch(function (error) {
-          // Handle errors
-          console.error("Download error for " + fileName + ":", error);
-          alert("Error downloading file " + fileName + ": " + error.message);
-        });
-    }, delay);
-  }
-
-  // Start downloading files with increasing delays
-  fileNames.forEach(function (fileName, index) {
-    downloadFile(fileName, index * 1000); // Delay each download by 1 second
+    fileRef
+      .getDownloadURL()
+      .then(function (url) {
+        // Create a link element to initiate download
+        var link = document.createElement("a");
+        link.href = url;
+        link.download = fileName; // Suggest filename for download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch(function (error) {
+        // Handle errors
+        console.error("Download error for " + fileName + ":", error);
+        alert("Error downloading file: " + error.message);
+      });
   });
 }
 
