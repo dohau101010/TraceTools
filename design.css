@@ -1075,11 +1075,29 @@ span[class^="badge"] {
 }
 
 #saoke:hover {
-  background-color: #2a2e9a; /* Màu nền khi rê chuột qua */
+  background-color: #8587d4; /* Màu nền khi rê chuột qua */
   box-shadow: 3px 3px 5px #b6a9a9, -3px -3px 5px #ffffff; /* Hiệu ứng lúng */
   cursor: pointer; /* Thay đổi con trỏ chuột */
 }
 
+#saoke1 {
+  font-size: 15px;
+  font-weight: 600;
+  width: 120px;
+  padding: 5px;
+  background-color: #3bb854;
+  color: white;
+  border-radius: 5px;
+  border: none; /* Đặt border là none để không có viền */
+  box-shadow: 5px 5px 10px #b6a9a9, -5px -5px 10px #ffffff;
+  transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+}
+
+#saoke1:hover {
+  background-color: #9a8f2a; /* Màu nền khi rê chuột qua */
+  box-shadow: 3px 3px 5px #b6a9a9, -3px -3px 5px #ffffff; /* Hiệu ứng lúng */
+  cursor: pointer; /* Thay đổi con trỏ chuột */
+}
 /* saoke */
 
 main.table {
@@ -1389,17 +1407,19 @@ tbody td.active {
 }
 
 .popup-content {
-  background-color: white;
-  padding: 30px;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  box-shadow: 5px 5px 10px #827d7d, -5px -5px 10px #9d9d9d;
+  background-color: #fff;
+  margin: 15% auto; /* Center the popup vertically and horizontally */
+  padding: 20px;
+  border-radius: 8px; /* Rounded corners */
+  width: 60%; /* Adjust width as needed */
+  max-width: 500px; /* Maximum width for larger screens */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  text-align: center; /* Center text */
 }
 
 .popup-button {
-  padding: 10px 20px;
-  margin: 10px;
+  padding: 20px 20px;
+  margin: 20px;
   border: none;
   border-radius: 5px;
   background-color: #007bff; /* Màu nền */
@@ -1408,7 +1428,7 @@ tbody td.active {
   transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
   border-radius: 10px;
   padding: 10px;
-  box-shadow: 5px 5px 10px #827d7d, -5px -5px 10px #dfdcdc;
+  box-shadow: 5px 5px 10px #cecbcb, -5px -5px 10px #dfdcdc;
 }
 
 .popup-button:hover {
