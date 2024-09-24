@@ -83,24 +83,37 @@ document.addEventListener("DOMContentLoaded", function () {
       const totalCell = row.querySelector("td:nth-child(7)"); // Cột thứ 7
 
       const quantity =
-        parseFloat(quantityCell ? quantityCell.innerText : "0") || 0;
-      const total = parseFloat(totalCell ? totalCell.innerText : "0") || 0;
+        parseFloat(
+          quantityCell ? quantityCell.innerText.replace(/\./g, "") : "0"
+        ) || 0; // Loại bỏ dấu chấm
+      const total =
+        parseFloat(totalCell ? totalCell.innerText.replace(/\./g, "") : "0") ||
+        0; // Loại bỏ dấu chấm
 
       totalQuantity += quantity;
       totalPrices += total;
     }
 
+    // Hàm định dạng số với dấu chấm
+    function formatNumber(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); // Định dạng số
+    }
+
     const totalRow = `
-        <tr>
-          <td><strong>TT</strong></td>
-          <td><strong>#</strong></td>
-          <td><strong>#</strong></td>
-          <td><strong>#</strong></td>
-          <td><strong>#</strong></td>
-          <td><strong>${totalQuantity.toFixed(2)}</strong></td>
-          <td><strong>${totalPrices.toFixed(2)}</strong></td>
-        </tr>
-      `;
+      <tr>
+        <td><strong>TT</strong></td>
+        <td><strong>#</strong></td>
+        <td><strong>#</strong></td>
+        <td><strong>#</strong></td>
+        <td><strong>#</strong></td>
+        <td><strong>${formatNumber(
+          totalQuantity
+        )}</strong></td> <!-- Định dạng lại số -->
+        <td><strong>${formatNumber(
+          totalPrices
+        )}</strong></td> <!-- Định dạng lại số -->
+      </tr>
+    `;
 
     const modifiedTable = customers_table.innerHTML.replace(
       /(<\/tbody>)/,
@@ -108,76 +121,85 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     const html_code = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <link rel="stylesheet" type="text/css" href="style.css">
-            <style>
-                @media print {
-                    @page {
-                        margin: 1cm;
-                    }
-                    img, .input-group, .export__file {
-                        display: none !important;
-                    }
-                    main.table {
-                        border-radius: 0 !important;
-                        box-shadow: none !important;
-                        background-color: transparent !important;
-                    }
-                    .table__body {
-                        border-radius: 0;
-                    }
-                    table {
-                        width: 100%;
-                        border-collapse: collapse;
-                        border: 1px solid #000;
-                        table-layout: fixed;
-                    }
-                    th {
-                        background-color: blue !important;
-                        color: black !important;
-                        font-weight: bold;
-                        padding: 10px;
-                        border: 1px solid black;
-                    }
-                    td {
-                        padding: 10px;
-                        border: 1px solid #000;
-                        color: black;
-                        word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
-                        word-break: break-all; 
-                    }
-                        
-                    tr:nth-child(even) td {
-                        background-color: #f2f2f2;
-                    }
-                    tr:nth-child(odd) td {
-                        background-color: white;
-                    }
-                    thead th span.icon-arrow {
-                        display: none;
-                    }
-                    th:first-child, td:first-child {
-                        width: 40px; 
-                    }
-                    body {
-                        font-size: 12px;
-                        font-family: Arial, sans-serif;
-                    }
-                    table, tr, td, th {
-                        page-break-inside: avoid;
-                    }
-                    body {
-                        zoom: 90%;
-                    }
-                }
-            </style>
-        </head>
-        <body>
-            <main class="table" id="customers_table">${modifiedTable}</main>
-        </body>
-        </html>`;
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <style>
+        @media print {
+          @page {
+            margin: 1cm;
+          }
+          img, .input-group, .export__file {
+            display: none !important;
+          }
+          main.table {
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            background-color: transparent !important;
+          }
+          .table__body {
+            border-radius: 0;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #000;
+            table-layout: fixed; /* Cố định kích thước bảng */
+          }
+          th, td {
+            padding: 10px;
+            border: 1px solid #000;
+            color: black;
+            text-align: center; /* Căn giữa theo chiều ngang */
+            vertical-align: middle; /* Căn giữa theo chiều dọc */
+            word-wrap: break-word; /* Tự động xuống dòng nếu quá dài */
+            word-break: break-all;  /* Ngắt từ nếu không vừa */
+          }
+          tr:nth-child(even) td {
+            background-color: #f2f2f2;
+          }
+          tr:nth-child(odd) td {
+            background-color: white;
+          }
+          thead th span.icon-arrow {
+            display: none;
+          }
+         
+          th:first-child, td:first-child {
+            width: 50px; 
+          }
+              /* Điều chỉnh chiều rộng cho cột Quantity */
+          th:nth-child(6), td:nth-child(6) {
+          width: 100px; /* Hẹp lại cho cột Quantity */
+        }
+                /* Điều chỉnh chiều rộng cho cột Quantity */
+          th:nth-child(7), td:nth-child(7) {
+          width: 120px; /* Hẹp lại cho cột Quantity */
+        }
+           th:nth-child(2), td:nth-child(2) {
+          width: 180px; /* Hẹp lại cho cột Quantity */
+        }
+        th:nth-child(5), td:nth-child(5) {
+          width: 100px; /* Hẹp lại cho cột Quantity */
+        }
+          body {
+            font-size: 10px;
+            font-family: Arial, sans-serif;
+          }
+          table, tr, td, th {
+            page-break-inside: avoid; /* Ngăn không cho bảng bị cắt khi in */
+          }
+          body {
+            zoom: 90%;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <main class="table" id="customers_table">${modifiedTable}</main>
+    </body>
+    </html>`;
 
     const new_window = window.open();
     new_window.document.write(html_code);
