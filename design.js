@@ -122,3 +122,29 @@ function fetchFile() {
       alert("You do not have permission for this decision!");
     });
 }
+
+// .........................................................
+
+function handleFileDownload() {
+  var fileRef = firebase.storage().ref().child("Design/Invoice.pdf");
+
+  fileRef
+    .getDownloadURL()
+    .then(function (url) {
+      // Create a link element to initiate download
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = "Invoice.pdf"; // Suggest filename for download
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch(function (error) {
+      // Handle errors
+      console.error("Download error:", error);
+      alert("Error downloading file: " + error.message);
+    });
+}
+
+// Set up event listener for GET ISSUE button
+document.getElementById("saoke1").addEventListener("click", handleFileDownload);
